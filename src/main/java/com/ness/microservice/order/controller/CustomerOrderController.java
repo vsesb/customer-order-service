@@ -5,9 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.http.ResponseEntity;
-//import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +31,8 @@ public class CustomerOrderController {
 
 	// feign proxy call - inter service call
 	@GetMapping("/customer-order/{oid}/items") 
-	public List<OrderItem> listAllOrderItems(int oid){
+	public List<OrderItem> listAllOrderItems(@PathVariable int oid){
+		System.out.println("order id: "+oid);
 		List<OrderItem> itemsList = proxy.listAllOrderItems(oid); 
 		return itemsList;
 	}
